@@ -4,9 +4,7 @@ package dev.lucasmachado.springbootperinity.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import dev.lucasmachado.springbootperinity.enterprise.AbstractEntity;
-import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
+import javax.persistence.*;
 
 import java.util.List;
 

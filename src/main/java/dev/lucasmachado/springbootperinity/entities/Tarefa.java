@@ -4,7 +4,7 @@ package dev.lucasmachado.springbootperinity.entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import dev.lucasmachado.springbootperinity.enterprise.AbstractEntity;
-import jakarta.persistence.*;
+import javax.persistence.*;
 
 import java.time.LocalDateTime;
 @Entity

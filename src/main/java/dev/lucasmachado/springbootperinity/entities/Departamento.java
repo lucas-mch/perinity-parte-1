@@ -2,8 +2,8 @@ package dev.lucasmachado.springbootperinity.entities;
 
 
 import dev.lucasmachado.springbootperinity.enterprise.AbstractEntity;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
 
 //- Cada Departamento terá id, nome.
