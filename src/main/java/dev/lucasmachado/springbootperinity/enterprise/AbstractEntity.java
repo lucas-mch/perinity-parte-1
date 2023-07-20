@@ -11,9 +11,7 @@ public abstract class AbstractEntity implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Version
-    @Column(name = "version")
-    private int version;
+
     public AbstractEntity() {
     }
     public AbstractEntity(Long id) {
@@ -21,8 +19,7 @@ public abstract class AbstractEntity implements Serializable {
     }
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
-    public int getVersion() { return version; }
-    public void setVersion(int version) { this.version = version; }
+
 
     @Override
     public boolean equals(Object o) {
