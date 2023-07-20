@@ -12,10 +12,8 @@ public class Tarefa extends AbstractEntity {
     private String titulo;
     private String descricao;
     private LocalDateTime prazo;
-    @JsonBackReference
-    @OneToOne
-    @JoinColumn(name = "i_pedidos", referencedColumnName = "pedidos")
-    @MapsId
+    @ManyToOne
+    @JoinColumn(name="i_departamentos", referencedColumnName = "id")
     private Departamento departamento;
 
     @ManyToOne
