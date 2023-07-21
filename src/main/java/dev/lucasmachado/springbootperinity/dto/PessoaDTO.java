@@ -53,7 +53,7 @@ public class PessoaDTO implements Serializable {
         for (Tarefa tarefa : tarefas) {
             count += tarefa.getDuracao();
         }
-        return (double) (count / tarefas.size());
+        return tarefas.size() > 0 ? (double) (count / tarefas.size()) : 0;
     }
 
     public DepartamentoDTO getDepartamento() {
