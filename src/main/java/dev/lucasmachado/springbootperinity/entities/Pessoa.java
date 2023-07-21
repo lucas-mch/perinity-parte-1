@@ -18,6 +18,12 @@ public class Pessoa extends AbstractEntity {
     @JsonIgnore
     private List<Tarefa> tarefas;
 
+    public Pessoa(Long id, String nome, Departamento departamento) {
+        super(id);
+        this.nome = nome;
+        this.departamento = departamento;
+    }
+
     public String getNome() {
         return nome;
     }

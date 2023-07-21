@@ -33,6 +33,17 @@ public class Tarefa extends AbstractEntity {
     public Tarefa() {
     }
 
+    public Tarefa(Long id, String titulo, String descricao, LocalDate prazo, Departamento departamento, Pessoa pessoa, Integer duracao, Boolean hasFinalizado) {
+        super(id);
+        this.titulo = titulo;
+        this.descricao = descricao;
+        this.prazo = prazo;
+        this.departamento = departamento;
+        this.pessoa = pessoa;
+        this.duracao = duracao;
+        this.hasFinalizado = hasFinalizado;
+    }
+
     public String getTitulo() {
         return titulo;
     }
