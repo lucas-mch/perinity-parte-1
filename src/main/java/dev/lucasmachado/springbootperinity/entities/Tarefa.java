@@ -1,11 +1,9 @@
 package dev.lucasmachado.springbootperinity.entities;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import dev.lucasmachado.springbootperinity.enterprise.AbstractEntity;
 
 import javax.persistence.*;
-
 import java.time.LocalDate;
 
 @Entity

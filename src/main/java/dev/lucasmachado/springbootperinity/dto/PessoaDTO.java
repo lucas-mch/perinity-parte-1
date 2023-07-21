@@ -23,6 +23,7 @@ public class PessoaDTO implements Serializable {
     @JsonIgnore
     private List<Tarefa> tarefas;
     private Integer horasGastasTarefas;
+    private Double mediaHorasGastasTarefas;
 
     public PessoaDTO(Pessoa pessoa) {
         this.id = pessoa.getId();
@@ -45,6 +46,14 @@ public class PessoaDTO implements Serializable {
             count += tarefa.getDuracao();
         }
         return count;
+    }
+
+    public Double getMediaHorasGastasTarefas() {
+        Integer count = 0;
+        for (Tarefa tarefa : tarefas) {
+            count += tarefa.getDuracao();
+        }
+        return (double) (count / tarefas.size());
     }
 
     public DepartamentoDTO getDepartamento() {

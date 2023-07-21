@@ -11,4 +11,6 @@ public interface PessoaRepository extends JpaRepository<Pessoa,Long>, QuerydslPr
 
     @Query("SELECT p, d, SUM(t.duracao) FROM Pessoa p LEFT JOIN p.tarefas t LEFT JOIN t.departamento d GROUP BY p.id, d.id")
     List<Pessoa> listarPessoasComDepartamentoETotalHorasGastas();
+
+    List<Pessoa> findByNomeContainingIgnoreCase(String nome);
 }
