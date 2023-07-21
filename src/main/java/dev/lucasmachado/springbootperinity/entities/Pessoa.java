@@ -1,11 +1,8 @@
 package dev.lucasmachado.springbootperinity.entities;
 
-//- Cada pessoa terá um id, nome, departamento e  lista de tarefas
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import dev.lucasmachado.springbootperinity.enterprise.AbstractEntity;
 import javax.persistence.*;
-
 import java.util.List;
 
 @Entity
@@ -20,5 +17,25 @@ public class Pessoa extends AbstractEntity {
     @OneToMany(mappedBy="pessoa")
     @JsonIgnore
     private List<Tarefa> tarefas;
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public Departamento getDepartamento() {
+        return departamento;
+    }
+
+    public void setDepartamento(Departamento departamento) {
+        this.departamento = departamento;
+    }
+
+    public List<Tarefa> getTarefas() {
+        return tarefas;
+    }
 
 }
