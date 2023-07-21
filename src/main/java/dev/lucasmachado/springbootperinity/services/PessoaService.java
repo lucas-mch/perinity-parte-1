@@ -34,6 +34,12 @@ public class PessoaService {
         );
     }
 
+    public PessoaDTO findDTOById(Long id) {
+        return new PessoaDTO(pessoaRepository.findById(id).orElseThrow(
+                () -> new ObjectNotFoundException(Pessoa.class, "Pessoa com o id : " + id + " nao encontrada.")
+        ));
+    }
+
     public Pessoa save(Pessoa pessoa){
         return pessoaRepository.save(pessoa);
     }
