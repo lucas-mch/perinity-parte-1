@@ -8,7 +8,13 @@
       http://www.liquibase.org/xml/ns/pro
       http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.1.xsd">
 
-    <changeSet id="0" author="lucas.machado">
+    <changeSet author="lucas.machado" id="0">
+        <sql dbms="postgresql" endDelimiter=";">
+            CREATE SCHEMA application_owner
+        </sql>
+    </changeSet>
+
+    <changeSet id="1" author="lucas.machado">
         <createTable tableName="departamentos">
 
             <column name="id" autoIncrement="true" type="bigint">
@@ -19,14 +25,234 @@
                 <constraints nullable="false"/>
             </column>
 
-            <column name="version" type="integer">
+        </createTable>
+    </changeSet>
+
+    <changeSet id="2" author="lucas.machado">
+        <createSequence sequenceName="sq_departamentos" incrementBy="1" startValue="1"/>
+    </changeSet>
+
+    <changeSet id="3" author="lucas.machado">
+        <createTable tableName="pessoas">
+
+            <column name="id" autoIncrement="true" type="bigint">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+
+            <column name="nome" type="varchar">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="i_departamentos" type="bigint">
+                <constraints foreignKeyName="fk_departamentos_pessoas" referencedTableName="departamentos"
+                             referencedColumnNames="id"/>
             </column>
 
         </createTable>
     </changeSet>
 
-    <changeSet id="1" author="lucas.machado">
-        <createSequence sequenceName="sq_departamentos" incrementBy="1" startValue="1"/>
+    <changeSet id="4" author="lucas.machado">
+        <createSequence sequenceName="sq_pessoas" incrementBy="1" startValue="1"/>
+    </changeSet>
+
+    <changeSet id="5" author="lucas.machado">
+        <createTable tableName="tarefas">
+
+            <column name="id" autoIncrement="true" type="bigint">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+
+            <column name="titulo" type="varchar">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="descricao" type="varchar">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="prazo" type="TIMESTAMP">
+            </column>
+
+            <column name="i_departamentos" type="bigint">
+                <constraints foreignKeyName="fk_departamentos_tarefas" referencedTableName="departamentos"
+                             referencedColumnNames="id"/>
+            </column>
+
+            <column name="duracao" type="integer">
+            </column>
+
+            <column name="i_pessoas" type="bigint">
+                <constraints foreignKeyName="fk_pessoa_tarefas" referencedTableName="pessoas"
+                             referencedColumnNames="id"/>
+            </column>
+
+            <column name="fl_finalizado" type="boolean">
+            </column>
+
+        </createTable>
+    </changeSet>
+
+    <changeSet id="6" author="lucas.machado">
+        <createSequence sequenceName="sq_tarefas" incrementBy="1" startValue="1"/>
+    </changeSet>
+
+    <changeSet author="lucas.machado" id="7">
+        <insert tableName="departamentos">
+            <column name="nome" value="Financeiro"/>
+        </insert>
+        <insert tableName="departamentos">
+            <column name="nome" value="Comercial"/>
+        </insert>
+        <insert tableName="departamentos">
+            <column name="nome" value="Desenvolvimento"/>
+        </insert>
+    </changeSet>
+
+    <changeSet author="lucas.machado" id="8">
+
+        <insert tableName="pessoas">
+            <column name="nome" value="Camila"/>
+            <column name="i_departamentos" value="1"/>
+        </insert>
+
+        <insert tableName="pessoas">
+            <column name="nome" value="Pedro"/>
+            <column name="i_departamentos" value="2"/>
+        </insert>
+
+        <insert tableName="pessoas">
+            <column name="nome" value="Fabiano"/>
+            <column name="i_departamentos" value="3"/>
+        </insert>
+
+        <insert tableName="pessoas">
+            <column name="nome" value="Raquel"/>
+            <column name="i_departamentos" value="3"/>
+        </insert>
+
+        <insert tableName="pessoas">
+            <column name="nome" value="Patricia"/>
+            <column name="i_departamentos" value="3"/>
+        </insert>
+
+        <insert tableName="pessoas">
+            <column name="nome" value="Joaquim"/>
+            <column name="i_departamentos" value="1"/>
+        </insert>
+
+    </changeSet>
+
+    <changeSet author="lucas.machado" id="9">
+
+        <insert tableName="tarefas">
+            <column name="titulo" value="Validar NF Janeiro"/>
+            <column name="descricao" value="Validar notas recebidas no mês de Janeiro"/>
+            <column name="prazo" value="2022-02-15 00:00:00+00"/>
+            <column name="i_departamentos" value="1"/>
+            <column name="duracao" value="14"/>
+            <column name="i_pessoas" value="1"/>
+            <column name="fl_finalizado" value="true"/>
+        </insert>
+
+        <insert tableName="tarefas">
+            <column name="titulo" value="Bug 352"/>
+            <column name="descricao" value="Corrigir bug 352 na versão 1.25"/>
+            <column name="prazo" value="2022-05-10 00:00:00+00"/>
+            <column name="i_departamentos" value="3"/>
+            <column name="duracao" value="25"/>
+            <column name="fl_finalizado" value="true"/>
+        </insert>
+
+        <insert tableName="tarefas">
+            <column name="titulo" value="Validar NF Janeiro"/>
+            <column name="descricao" value="Validar notas recebidas no mês de Janeiro"/>
+            <column name="prazo" value="2022-02-15 00:00:00+00"/>
+            <column name="i_departamentos" value="1"/>
+            <column name="duracao" value="14"/>
+            <column name="i_pessoas" value="1"/>
+            <column name="fl_finalizado" value="false"/>
+        </insert>
+
+        <insert tableName="tarefas">
+            <column name="titulo" value="Liberação da versão 1.24"/>
+            <column name="descricao" value="Disponibilizar pacote para testes"/>
+            <column name="prazo" value="2022-02-02 00:00:00+00"/>
+            <column name="i_departamentos" value="3"/>
+            <column name="duracao" value="2"/>
+            <column name="i_pessoas" value="3"/>
+            <column name="fl_finalizado" value="false"/>
+        </insert>
+
+        <insert tableName="tarefas">
+            <column name="titulo" value="Reunião A"/>
+            <column name="descricao" value="Reunião com cliente A para apresentação do produto"/>
+            <column name="prazo" value="2022-02-05 00:00:00+00"/>
+            <column name="i_departamentos" value="2"/>
+            <column name="duracao" value="5"/>
+            <column name="fl_finalizado" value="false"/>
+        </insert>
+
+        <insert tableName="tarefas">
+            <column name="titulo" value="Reunião final"/>
+            <column name="descricao" value="Fechamento contrato"/>
+            <column name="prazo" value="2022-03-28 00:00:00+00"/>
+            <column name="i_departamentos" value="2"/>
+            <column name="duracao" value="6"/>
+            <column name="fl_finalizado" value="false"/>
+        </insert>
+
+        <insert tableName="tarefas">
+            <column name="titulo" value="Pagamento 01/2022"/>
+            <column name="descricao" value="Realizar pagamento dos fornecedores"/>
+            <column name="prazo" value="2022-01-31 00:00:00+00"/>
+            <column name="i_departamentos" value="1"/>
+            <column name="duracao" value="6"/>
+            <column name="i_pessoas" value="1"/>
+            <column name="fl_finalizado" value="true"/>
+        </insert>
+
+        <insert tableName="tarefas">
+            <column name="titulo" value="Bug 401"/>
+            <column name="descricao" value="Corrigir bug 401 na versão 1.20"/>
+            <column name="prazo" value="2022-02-01 00:00:00+00"/>
+            <column name="i_departamentos" value="3"/>
+            <column name="duracao" value="2"/>
+            <column name="i_pessoas" value="4"/>
+            <column name="fl_finalizado" value="true"/>
+        </insert>
+
+        <insert tableName="tarefas">
+            <column name="titulo" value="Bug 399"/>
+            <column name="descricao" value="Corrigir bug 399 na versão 1.20"/>
+            <column name="prazo" value="2022-01-28 00:00:00+00"/>
+            <column name="i_departamentos" value="3"/>
+            <column name="duracao" value="6"/>
+            <column name="i_pessoas" value="5"/>
+            <column name="fl_finalizado" value="true"/>
+        </insert>
+
+        <insert tableName="tarefas">
+            <column name="titulo" value="Reunião B"/>
+            <column name="descricao" value="Reunião com cliente B para apresentação do produto"/>
+            <column name="prazo" value="2022-01-31 00:00:00+00"/>
+            <column name="i_departamentos" value="2"/>
+            <column name="duracao" value="5"/>
+            <column name="i_pessoas" value="2"/>
+            <column name="fl_finalizado" value="true"/>
+        </insert>
+
+        <insert tableName="tarefas">
+            <column name="titulo" value="Validar NF Fevereiro"/>
+            <column name="descricao" value="Validar notas recebidas no mês de Fevereiro"/>
+            <column name="prazo" value="2022-03-15 00:00:00+00"/>
+            <column name="i_departamentos" value="1"/>
+            <column name="duracao" value="14"/>
+            <column name="i_pessoas" value="6"/>
+            <column name="fl_finalizado" value="false"/>
+        </insert>
+
+
+
     </changeSet>
 
 </databaseChangeLog>
