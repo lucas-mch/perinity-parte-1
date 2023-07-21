@@ -23,6 +23,11 @@ public class Departamento extends AbstractEntity {
     public Departamento() {
     }
 
+    public Departamento(Long id, String nome) {
+        super(id);
+        this.nome = nome;
+    }
+
     public String getNome() {
         return nome;
     }
