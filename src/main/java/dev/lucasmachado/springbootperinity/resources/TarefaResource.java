@@ -30,12 +30,14 @@ public class TarefaResource {
 
    @RequestMapping(value = "/alocar/{id}",method = RequestMethod.PUT)
    public ResponseEntity<Tarefa> alocatePessoaInTarefa(@PathVariable Long id, @Valid @RequestBody Pessoa pessoa) {
-       return ResponseEntity.ok().body(tarefaService.alocarPessoaNaTarefa(id,pessoa));
+        Tarefa tarefaParaAlocar = tarefaService.alocarPessoaNaTarefa(id,pessoa);
+        return ResponseEntity.noContent().build();
    }
 
     @RequestMapping(value = "/finalizar/{id}",method = RequestMethod.PUT)
     public ResponseEntity<Tarefa> setTarefaFinalizada(@PathVariable Long id) {
-        return ResponseEntity.ok().body(tarefaService.setTarefaFinalizada(id));
+        Tarefa tarefaParaFinalizar = tarefaService.setTarefaFinalizada(id);
+        return ResponseEntity.noContent().build();
     }
 
     @RequestMapping(value = "/pendentes", method = RequestMethod.GET)
