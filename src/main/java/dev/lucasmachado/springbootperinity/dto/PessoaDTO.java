@@ -19,7 +19,7 @@ public class PessoaDTO implements Serializable {
     @NotEmpty(message = "Preenchimento obrigatorio")
     @Length(min = 5, max = 120, message = "O tamanho deve ser entre 5 a 120 caracteres")
     private String nome;
-    private DepartamentoDTO departamento;
+    private Departamento departamento;
     @JsonIgnore
     private List<Tarefa> tarefas;
     private Integer horasGastasTarefas;
@@ -28,7 +28,7 @@ public class PessoaDTO implements Serializable {
     public PessoaDTO(Pessoa pessoa) {
         this.id = pessoa.getId();
         this.nome = pessoa.getNome();
-        this.departamento = new DepartamentoDTO(pessoa.getDepartamento());
+        this.departamento = pessoa.getDepartamento();
         this.tarefas = pessoa.getTarefas();
     }
 
@@ -56,7 +56,7 @@ public class PessoaDTO implements Serializable {
         return tarefas.size() > 0 ? (double) (count / tarefas.size()) : 0;
     }
 
-    public DepartamentoDTO getDepartamento() {
+    public Departamento getDepartamento() {
         return departamento;
     }
 
