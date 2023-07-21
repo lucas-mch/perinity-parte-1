@@ -20,4 +20,8 @@ public class PessoaGastosDTO implements Serializable {
     public double getMediaHorasGastas() {
         return mediaHorasGastas;
     }
+
+    public Long getId() {
+        return id;
+    }
 }

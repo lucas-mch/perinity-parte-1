@@ -2,19 +2,26 @@ package dev.lucasmachado.springbootperinity.entities;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import dev.lucasmachado.springbootperinity.enterprise.AbstractEntity;
+import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import java.time.LocalDate;
 
 @Entity
 @Table(name = "tarefas")
 public class Tarefa extends AbstractEntity {
+    @NotEmpty(message = "Preenchimento obrigatorio")
+    @Length(min= 3, max = 80, message = "O tamanho deve ser entre 5 a 80 caracteres")
     private String titulo;
+    @NotEmpty(message = "Preenchimento obrigatorio")
+    @Length(min= 3, max = 200, message = "O tamanho deve ser entre 5 a 200 caracteres")
     private String descricao;
     @JsonFormat(pattern="dd-MM-yyyy")
     private LocalDate prazo;
     @ManyToOne
     @JoinColumn(name="i_departamentos", referencedColumnName = "id")
+    @NotEmpty
     private Departamento departamento;
     @ManyToOne
     @JoinColumn(name="i_pessoas", referencedColumnName = "id")
@@ -24,6 +31,17 @@ public class Tarefa extends AbstractEntity {
     private Boolean hasFinalizado = Boolean.FALSE;
 
     public Tarefa() {
+    }
+
+    public Tarefa(Long id, String titulo, String descricao, LocalDate prazo, Departamento departamento, Pessoa pessoa, Integer duracao, Boolean hasFinalizado) {
+        super(id);
+        this.titulo = titulo;
+        this.descricao = descricao;
+        this.prazo = prazo;
+        this.departamento = departamento;
+        this.pessoa = pessoa;
+        this.duracao = duracao;
+        this.hasFinalizado = hasFinalizado;
     }
 
     public String getTitulo() {

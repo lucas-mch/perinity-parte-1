@@ -20,6 +20,12 @@ public class PessoaResource {
     @Autowired
     private PessoaService pessoaService;
 
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public ResponseEntity<PessoaDTO> findById(@PathVariable Long id) {
+        PessoaDTO pessoaToFind = pessoaService.findDTOById(id);
+        return ResponseEntity.ok().body(pessoaToFind);
+    }
+
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<Void> save(@Valid @RequestBody Pessoa pessoa) {
         pessoa.setId(null);
