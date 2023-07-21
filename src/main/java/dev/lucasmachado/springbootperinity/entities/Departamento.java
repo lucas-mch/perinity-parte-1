@@ -31,5 +31,11 @@ public class Departamento extends AbstractEntity {
         this.nome = nome;
     }
 
+    public List<Pessoa> getPessoas() {
+        return pessoas;
+    }
 
+    public List<Tarefa> getTarefas() {
+        return tarefas;
+    }
 }
