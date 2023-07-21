@@ -19,7 +19,7 @@ CREATE TABLE tarefas
 (
     id IDENTITY NOT NULL PRIMARY KEY,
     titulo          VARCHAR(50)              NOT NULL,
-    descricao       VARCHAR(50)              NOT NULL,
+    descricao       VARCHAR(200)              NOT NULL,
     prazo           TIMESTAMP WITH TIME ZONE NOT NULL,
     i_departamentos BIGINT                   NOT NULL,
     duracao         INT,
